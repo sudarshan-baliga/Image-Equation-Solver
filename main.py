@@ -13,7 +13,6 @@ def preprocessRegion(img, y1, y2, x1, x2):
 
 def slidingWindow(img):
     height, width = img.shape
-    print(width)
     img2 = img.copy()
     regions = []
     x1, x2 = 30, 250
@@ -29,7 +28,7 @@ def slidingWindow(img):
     return regions
 
 
-img = cv2.imread('handwritten.png')
+img = cv2.imread('handwritten2.png')
 
 plt.imshow(img)
 plt.title("original image")
@@ -44,7 +43,7 @@ plt.show()
 
 # dilate the image
 kernel = np.ones((5, 5), np.uint8)
-img = cv2.dilate(img, kernel, iterations=10)
+img = cv2.dilate(img, kernel, iterations=8)
 plt.imshow(img, cmap = 'gray')
 plt.title("dilated image")
 plt.show()
