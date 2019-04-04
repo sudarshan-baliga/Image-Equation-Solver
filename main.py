@@ -3,7 +3,7 @@ import cv2
 from matplotlib import pyplot as plt
 import pickle
 import imutils
-
+from converter import convert
 
 
 def preprocessRegion(img, y1, y2, x1, x2):
@@ -28,7 +28,7 @@ def slidingWindow(img):
     return regions
 
 
-img = cv2.imread('handwritten2.png')
+img = cv2.imread('handwritten1.png')
 
 plt.imshow(img)
 plt.title("original image")
@@ -62,4 +62,6 @@ for reg in regions:
     plt.title("region with symbol " + sym[0])
     plt.show()
     result.append(sym[0])
-print(result)
+for char in result:
+    print(char, end=" ")
+print("=", convert(result))
