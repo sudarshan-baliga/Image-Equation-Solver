@@ -5,12 +5,14 @@ import pickle
 import imutils
 from converter import convert
 
-
+#convert the region to 50 x 50
 def preprocessRegion(img, y1, y2, x1, x2):
     x = img[y1:y2, x1: x2]
     x = imutils.resize(x, width=50, height=50)
     return x
 
+
+#get the regions with sliding window technique
 def slidingWindow(img):
     height, width = img.shape
     img2 = img.copy()
@@ -28,8 +30,8 @@ def slidingWindow(img):
     return regions
 
 
-img = cv2.imread('handwritten1.png')
 
+img = cv2.imread('handwritten1.png')
 plt.imshow(img)
 plt.title("original image")
 plt.show()
@@ -38,7 +40,7 @@ gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 # thresholding
 ret, img = cv2.threshold(gray,100,255,cv2.THRESH_BINARY_INV)
 plt.imshow(img, cmap = 'gray')
-plt.title("segmented image")
+plt.title("After thresholding ")
 plt.show()
 
 # dilate the image
@@ -59,7 +61,7 @@ for reg in regions:
     reg = (reg < 50).astype(int)
     sym = knn.predict(reg.reshape(1,-1))
     plt.imshow(reg, cmap='gray')
-    plt.title("region with symbol " + sym[0])
+    plt.title("Predicted " + sym[0] + " in this region")
     plt.show()
     result.append(sym[0])
 for char in result:
